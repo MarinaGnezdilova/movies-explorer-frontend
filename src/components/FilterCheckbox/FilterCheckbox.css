@@ -1,0 +1,44 @@
+.FilterCheckbox__toggle-icon {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 28px;
+}
+
+@media screen and (max-width: 769px) {
+    .FilterCheckbox__toggle-icon {
+        padding-bottom: 42px;
+    }
+}
+
+.FilterCheckbox__toggle-icon-container {
+    box-sizing: border-box;
+    background-color: #3DDC84;
+    width: 36px;
+    height: 20px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-right: 5px;
+    margin-right: 12px;
+}
+
+.FilterCheckbox__toggle-icon-circle {
+    background: #FFFFFF;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.FilterCheckbox__toggle-text {
+    padding: 0;
+    margin: 0;
+    color: #FFFFFF;
+    font-family: "Inter", "Arial", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.2;
+    font-style: normal;
+    padding-top: 3px;
+}
