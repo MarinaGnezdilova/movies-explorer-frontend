@@ -1,0 +1,142 @@
+.Profile {
+  display: flex;
+  padding-left: 70px;
+  padding-right: 70px;
+  padding-top: 10px;
+}
+
+@media screen and (max-width: 769px) {
+  .Profile {
+    padding-left: 30px;
+    padding-right: 15px;
+    padding-top: 5px;
+  }
+}
+
+@media screen and (max-width: 595px) {
+  .Profile {
+    padding-left: 15px;
+    padding-right: 20px;
+    padding-top: 5px;
+  }
+}
+
+.Profile__title {
+  color: #ffffff;
+  font-family: "Inter", "Arial", sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.2;
+  font-style: normal;
+  margin-top: 76px;
+  margin-bottom: 118px;
+}
+
+@media screen and (max-width: 769px) {
+  .Profile__title {
+    margin-top: 248px;
+    margin-bottom: 85px;
+  }
+}
+
+@media screen and (max-width: 595px) {
+  .Profile__title {
+    margin-top: 80px;
+    margin-bottom: 70px;
+  }
+}
+
+.Profile__account-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Profile__input {
+  display: flex;
+  justify-content: space-between;
+  width: 410px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+@media screen and (max-width: 595px) {
+  .Profile__input {
+    width: 260px;
+  }
+}
+
+.Profile__label-input {
+  color: #ffffff;
+  font-family: "Inter", "Arial", sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 1.2;
+  font-style: normal;
+  margin-right: 15px;
+}
+
+#name,
+#email {
+  position: absolute;
+  width: 100%;
+  left: 40px;
+  background-color: #202020;
+  border: none;
+  color: #ffffff;
+  font-family: "Inter", "Arial", sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 1.2;
+  font-style: normal;
+  height: 18px;
+  margin-top: 8px;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.Profile__button {
+  background-color: #202020;
+  border: none;
+  color: #ffffff;
+  font-family: "Inter", "Arial", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 1.2;
+  font-style: normal;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+.Profile__button-exit {
+  color: #ee3465;
+  margin-bottom: 70px;
+}
+
+.Profile__button-edit {
+  margin-top: 200px;
+}
+
+@media screen and (max-width: 769px) {
+  .Profile__button-edit {
+    margin-top: 190px;
+  }
+}
+
+@media screen and (max-width: 595px) {
+  .Profile__button-edit {
+    margin-top: 360px;
+  }
+}
+
+.Profile__current-data {
+  border: none;
+  color: #ffffff;
+  font-family: "Inter", "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.2;
+  font-style: normal;
+  padding-top: 11px;
+  z-index: 3;
+}
