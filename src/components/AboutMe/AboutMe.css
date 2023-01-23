@@ -15,7 +15,7 @@
   }
 }
 
-@media screen and (max-width: 760px) {
+@media screen and (max-width: 767px) {
   .AboutMe {
     padding-left: 14px;
     padding-right: 14px;
@@ -39,13 +39,7 @@
 @media screen and (max-width: 767px) {
   .AboutMe__block-text {
     order: 3;
-    margin-left: 20%;
-  }
-}
-
-@media screen and (max-width: 389px) {
-  .AboutMe__block-text {
-    margin-left: 22%;
+    width: 300px;
   }
 }
 

@@ -25,12 +25,14 @@
 
 .SearchForm__icon-search {
   box-sizing: border-box;
-  padding-top: 6px;
-  padding-left: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 36px;
   height: 34px;
   border-radius: 50%;
   border: 1px solid #424242;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 767px) {
@@ -70,6 +72,9 @@
   padding: 0;
   height: 34px;
   width: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 50%;
   background-color: #4285f4;
   cursor: pointer;

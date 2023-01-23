@@ -5,7 +5,7 @@ import accountButton from "../../images/account-logo.svg";
 function Profile(props) {
   return (
     <>
-    <div className="Profile">
+    <header className="App__profile">
       <Header />
       <Navigation
           children={
@@ -60,7 +60,7 @@ function Profile(props) {
                     </button>
                   </Link>
                 </div>
-                <Link to="/profile" className="">
+                <Link to="/profile" className="Navigation__link">
                   <button className="Navigation__button-header">
                     <div className="Navigation__account-button-text">
                       Аккаунт
@@ -74,9 +74,8 @@ function Profile(props) {
             </>
           }
         />
-       
-      </div>
-       <div className="Profile__account-data">
+      </header>
+       <section className="Profile">
         <h2 className="Profile__title">Привет, Виталий!</h2>
        <div className="Profile__input">
          <p className="Profile__label-input">Имя</p>
@@ -94,7 +93,7 @@ function Profile(props) {
         <button className="Profile__button Profile__button-exit">Выйти из аккаунта</button>
       </Link>
       
-   </div>
+   </section>
 
    </>
   )}

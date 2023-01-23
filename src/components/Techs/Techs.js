@@ -1,7 +1,7 @@
 function Techs(props) {
   return (
     <>
-      <div className="Techs__block-title"> {props.children}</div>
+      <section className="Main__techs-block-title"> {props.children}</section>
       <section className="Techs">
         <h2 className="Techs__title">7 технологий</h2>
         <p className="Techs__text">

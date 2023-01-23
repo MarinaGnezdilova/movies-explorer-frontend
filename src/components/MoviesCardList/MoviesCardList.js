@@ -3,7 +3,7 @@ function MoviesCardList(props) {
     <section className="MoviesCardList">
       <div className="MoviesCardList__film">{props.children}</div>
       <div>
-        <button className="MoviesCardList_button-else">Еще</button>
+        <button className="MoviesCardList__button-else">Еще</button>
       </div>
     </section>
   );

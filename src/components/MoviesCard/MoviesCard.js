@@ -1,5 +1,5 @@
 import buttonDeleteFilm from "../../images/icon-button-delete-film.svg";
-import iconSavedFilm from "../../images/icon-saved-film.png";
+import iconSavedFilm from "../../images/icon-saved-film.svg";
 function MoviesCard(props) {
   return (
     <div className="MoviesCard">
@@ -15,7 +15,7 @@ function MoviesCard(props) {
           className="MoviesCard__button-image"
         />
       </button>
-      <button className="MoviesCard__button-save-film_active MoviesCard__button-save-film_inactive">
+      <button className=" MoviesCard__button-save-film MoviesCard__button-save-film_inactive">
         Сохранить
       </button>
       <button className="MoviesCard__button-delete-film-active">

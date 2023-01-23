@@ -1,10 +1,9 @@
 import iconSearch from "../../images/icon-search.svg";
-import iconArrow from "../../images/icon_arrow.png";
-import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
+import iconArrow from "../../images/icon_arrow.svg";
 function SearchForm() {
   return (
     <>
-      <div className="SearchForm">
+      <form className="SearchForm">
         <div className="SearchForm__icon-search">
           <img
             alt="Иконка поиска"
@@ -12,7 +11,7 @@ function SearchForm() {
             className="SearchForm__icon-search-image"
           />
         </div>
-        <input className="SearchForm__input" placeholder="Фильм"></input>
+        <input className="SearchForm__input" placeholder="Фильм" required></input>
         <button className="SearchForm__button">
           <img
             src={iconArrow}
@@ -20,8 +19,8 @@ function SearchForm() {
             className="SearchForm__button-image"
           />
         </button>
-      </div>
-      <FilterCheckbox />
+      </form>
+      
     </>
   );
 }

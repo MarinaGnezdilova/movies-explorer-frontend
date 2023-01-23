@@ -104,13 +104,5 @@
   margin-right: 0;
 }
 
-.Techs__block-title {
-  background-color: #272727;
-  padding-top: 40px;
-}
 
-@media screen and (max-width: 769px) {
-  .Techs__block-title {
-    padding-top: 0;
-}
-}
+

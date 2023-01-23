@@ -2,11 +2,10 @@ import Header from "../Header/Header";
 import { Link } from "react-router-dom";
 function FormEnter(props) {
   return (
-    <div className="FormEnter">
+    <main className="FormEnter">
       <div className="FormEnter__header">
         <div className="FormEnter__button-top">
-          {" "}
-          <Header />{" "}
+          <Header />
         </div>
         <h2 className="FormEnter__title">{props.title}</h2>
         <form className="FormEnter__form">
@@ -25,7 +24,7 @@ function FormEnter(props) {
           </div>
         </form>
       </div>
-    </div>
+    </main>
   );
 }
 

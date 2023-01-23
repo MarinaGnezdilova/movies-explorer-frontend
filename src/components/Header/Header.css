@@ -22,51 +22,6 @@
   height: 38px;
 }
 
-.Header__container-main {
-  padding-right: 70px;
-  display: flex;
-  background-color: #073042;
-  padding-left: 70px;
-  align-items: center;
-}
-
-@media screen and (max-width: 769px) {
-  .Header__container-main {
-    padding-left: 30px;
-    padding-right: 15px;
-  }
-}
-
-@media screen and (max-width: 596px) {
-  .Header__container-main {
-    padding-left: 14px;
-    padding-right: 14px;
-  }
-}
-
-
-.Header__header-page-movies {
-  padding-left: 70px;
-  padding-right: 50px;
-  display: flex;
-  padding-top: 8px;
-}
-
-@media screen and (max-width: 769px) {
-  .Header__header-page-movies {
-    padding-left: 30px;
-    padding-right: 15px;
-  }
-}
-
-@media screen and (max-width: 595px) {
-  .Header__header-page-movies {
-    padding-top: 0;
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-}
-
 .Header__account-button {
   text-decoration: none;
 }

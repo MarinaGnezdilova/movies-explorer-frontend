@@ -5,16 +5,16 @@ import Navigation from "../Navigation/Navigation";
 import accountButton from "../../images/account-logo.svg";
 import SearchForm from "../SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
-import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import cardImage2 from "../../images/card-image2.png";
 import cardImage3 from "../../images/card-image3.png";
 import SavedMoviesCardList from "../SavedMoviesCardList/SavedMoviesCardList";
+import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 function SavedMovies() {
   return (
-    <div className="SavedMovies">
-      <div className="Header__header-page-movies">
+    <main className="SavedMovies">
+      <header className="App__header-page-movies">
         <Header />
         <Navigation
           children={
@@ -26,6 +26,7 @@ function SavedMovies() {
                 <div className="Navigation__burger-line Navigation__second"></div>
                 <div className="Navigation__burger-line Navigation__third"></div>
                 <div className="Navigation__burger-line Navigation__fourth"></div>
+              
                 <div className="Navigation__menu1">
                   <div className="Navigation__menu-opening-buttons">
                     <Link to="/" className="">
@@ -55,7 +56,7 @@ function SavedMovies() {
                     </button>
                   </Link>
                 </div>
-              </div>
+                </div>
               <div className="Navigation__menu">
                 <div className="Navigation__buttons-about-films">
                   <Link to="/movies" className="Navigation__button">
@@ -69,7 +70,7 @@ function SavedMovies() {
                     </button>
                   </Link>
                 </div>
-                <Link to="/profile" className="">
+                <Link to="/profile" className="Navigation__link">
                   <button className="Navigation__button-header">
                     <div className="Navigation__account-button-text">
                       Аккаунт
@@ -83,12 +84,13 @@ function SavedMovies() {
             </>
           }
         />
-      </div>
+      </header>
       <SearchForm />
+      <FilterCheckbox />
       <Preloader />
       <SavedMoviesCardList
         children={
-          <>
+          <div className="SavedMoviesCardList__films">
             <MoviesCard
               imageLink={cardImage2}
               nameFilm="В погоне за Бенкси"
@@ -99,11 +101,16 @@ function SavedMovies() {
               nameFilm="Бег это свобода"
               duration="1ч 17м"
             />
-          </>
+             <MoviesCard
+              imageLink={cardImage2}
+              nameFilm="В погоне за Бенкси"
+              duration="1ч 17м"
+            />
+          </div>
         }
       />
       <Footer />
-    </div>
+    </main>
   );
 }
 

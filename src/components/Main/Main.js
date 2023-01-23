@@ -10,8 +10,8 @@ import Navigation from "../Navigation/Navigation";
 import { Link } from "react-router-dom";
 function Main() {
   return (
-    <div className="Main">
-      <div className="Header__container-main">
+    <main className="Main">
+      <header className="Main__container-main">
         <Header />
         <Navigation
           children={
@@ -27,39 +27,37 @@ function Main() {
             </div>
           }
         />
-      </div>
+      </header>
 
       <Promo />
       <AboutProject
         children={
           <>
-            <div className="BlockTitle">
+            <section className="BlockTitle">
               <h2 className="BlockTitle__title">О проекте</h2>
-            </div>
+            </section>
           </>
         }
       />
       <Techs
         children={
-          <>
-            <div className="BlockTitle">
-              <h2 className="BlockTitle__title">Технологии</h2>
+            <div className="Main__Techs-blockTitle">
+              <h2 className="Main__Techs-blockTitle-title">Технологии</h2>
             </div>
-          </>
         }
       />
       <AboutMe
         children={
           <>
-            <div className="BlockTitle">
+            <section className="BlockTitle">
               <h2 className="BlockTitle__title">Студент</h2>
-            </div>
+            </section>
           </>
         }
       />
       <Portfolio />
       <Footer />
-    </div>
+    </main>
   );
 }
 

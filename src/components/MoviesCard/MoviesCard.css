@@ -62,7 +62,7 @@
   margin-bottom: 2px;
 }
 
-.MoviesCard__button-save-film_active {
+.MoviesCard__button-save-film {
   width: 72px;
   height: 21px;
   border: none;
@@ -81,14 +81,14 @@
 }
 
 @media screen and (max-width: 1279px) {
-  .MoviesCard__button-save-film_active {
+  .MoviesCard__button-save-film {
     left: 255px;
     bottom: 188px;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .MoviesCard__button-save-film_active {
+  .MoviesCard__button-save-film {
     left: 220px;
     bottom: 170px;
   }

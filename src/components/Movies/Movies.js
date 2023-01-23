@@ -11,10 +11,11 @@ import cardImage from "../../images/card-image.png";
 import cardImage1 from "../../images/card-image1.png";
 import cardImage2 from "../../images/card-image2.png";
 import cardImage3 from "../../images/card-image3.png";
+import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 function Movies() {
   return (
     <>
-      <div className="Header__header-page-movies">
+      <header className="App__header-page-movies">
         <Header />
         <Navigation
           children={
@@ -83,8 +84,9 @@ function Movies() {
             </>
           }
         />
-      </div>
+      </header>
       <SearchForm />
+      <FilterCheckbox />
       <Preloader />
       <MoviesCardList
         children={

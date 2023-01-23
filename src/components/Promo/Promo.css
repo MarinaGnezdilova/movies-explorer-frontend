@@ -19,7 +19,7 @@
   }
 }
 
-@media screen and (max-width: 595px) {
+@media screen and (max-width: 660px) {
   .Promo {
     height: 636px;
   }
@@ -57,7 +57,7 @@
   }
 }
 
-@media screen and (max-width: 595px) {
+@media screen and (max-width: 660px) {
   .Promo__title {
     width: 310px;
     font-size: 30px;
@@ -88,7 +88,7 @@
   }
 }
 
-@media screen and (max-width: 595px) {
+@media screen and (max-width: 660px) {
   .Promo__text {
     margin-left: 10%;
     padding-bottom: 80px;
@@ -115,7 +115,7 @@
   }
 }
 
-@media screen and (max-width: 595px) {
+@media screen and (max-width: 660px) {
   .Promo__button {
     margin-left: 30%;
   }
@@ -133,7 +133,7 @@
   }
 }
 
-@media screen and (max-width: 595px) {
+@media screen and (max-width: 660px) {
   .Promo__image {
     width: 206px;
     height: 210px;

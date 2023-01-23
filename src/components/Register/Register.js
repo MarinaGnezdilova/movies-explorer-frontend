@@ -2,7 +2,7 @@ import Header from "../Header/Header";
 import { Link } from "react-router-dom";
 function Register(props) {
     return (
-        <div className="Register">
+        <main className="Register">
         <div className="Register__header">
           <div className="Register__button-top">
             {" "}
@@ -25,7 +25,7 @@ function Register(props) {
             </div>
           </form>
         </div>
-      </div>
+      </main>
     );
   }
   

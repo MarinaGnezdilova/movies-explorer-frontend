@@ -1,7 +1,7 @@
 import imagePromo from "../../images/landing-logo.svg";
 function Promo() {
   return (
-    <div className="Promo">
+    <section className="Promo">
       <div className="Promo__block-info">
         <h1 className="Promo__title">
           Учебный проект студента факультета Веб-разработки.
@@ -16,7 +16,7 @@ function Promo() {
         className="Promo__image"
         alt="Изображение в баннере"
       />
-    </div>
+    </section>
   );
 }
 

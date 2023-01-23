@@ -9,7 +9,7 @@ import NotFound from "../NotFound/NotFound";
 import Register from "../Register/Register";
 function App() {
   return (
-    <main className="App">
+    <page className="App">
       <Routes>
         <Route exact path="/" element={<Main />} />
         <Route path="/movies" element={<Movies />} />
@@ -22,11 +22,11 @@ function App() {
               children={
                 <>
                   <label className="Register__label-form">Имя</label>
-                  <input className="Register__input"></input>
+                  <input className="Register__input" required></input>
                   <label className="Register__label-form">E-mail</label>
-                  <input className="Register__input"></input>
+                  <input className="Register__input" required></input>
                   <label className="Register__label-form">Пароль</label>
-                  <input className="Register__input"></input>
+                  <input className="Register__input" required></input>
                 </>
               }
               buttonText="Зарегистрироваться"
@@ -45,9 +45,9 @@ function App() {
               children={
                 <>
                   <label className="FormEnter__label-form">E-mail</label>
-                  <input className="FormEnter__input"></input>
+                  <input className="FormEnter__input" required></input>
                   <label className="FormEnter__label-form">Пароль</label>
-                  <input className="FormEnter__input"></input>
+                  <input className="FormEnter__input" required></input>
                 </>
               }
               buttonText="Войти"
@@ -61,7 +61,7 @@ function App() {
         <Route exact path="/profile" element={<Profile />}></Route>
         <Route exact path="*" element={<NotFound />}></Route>
       </Routes>
-    </main>
+    </page>
   );
 }
 
