@@ -316,3 +316,14 @@
   padding-bottom: 10px;
   padding-right: 30px;
 }
+
+.Navigation__button-header_main {
+  background-color: #073042;
+}
+
+.Navigation__button-circle_main {
+  background-color: #4285F4;
+}
+
+.Navigation__buttons-about-films_main {
+}

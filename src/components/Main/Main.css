@@ -9,7 +9,17 @@
     background-color: #073042;
     padding-left: 70px;
     align-items: center;
+    
   }
+
+.Main__container-main_loggedIn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #073042;
+  padding-left: 70px;
+  padding-right: 70px;
+}
   
   @media screen and (max-width: 769px) {
     .Main__container-main {
@@ -75,4 +85,8 @@
     .Main__techs-block-title {
       padding-top: 0;
   }
+  }
+
+  .Navigation__main_hidden {
+    display: none;
   }

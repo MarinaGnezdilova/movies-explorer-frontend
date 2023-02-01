@@ -1,8 +1,36 @@
+import React, { useState }  from "react";
+import { useNavigate } from "react-router-dom";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import Header from "../Header/Header";
 import Navigation from "../Navigation/Navigation";
 import { Link } from "react-router-dom";
 import accountButton from "../../images/account-logo.svg";
+import { mainApi } from "../../utils/MainApi";
+import { Formik } from "formik";
+import * as yup from "yup";
+
 function Profile(props) {
+  const {currentUser} = React.useContext(CurrentUserContext);
+  const {setLoggedIn} = React.useContext(CurrentUserContext);
+  const {setCurrentUser} = React.useContext(CurrentUserContext);
+  const navigate = useNavigate();
+
+function signOut() {
+  localStorage.removeItem("jwt");
+  navigate("/");
+  setLoggedIn(false);
+}
+const regexName = /^[a-zа-я\ \-]+$/gi;  
+const validationsSchemaProfile = yup.object().shape({
+  email: yup
+    .string()
+    .email("Поле должно быть email")
+    .notOneOf([currentUser.data.email], "Новая и старая почта не должны совпадать")
+    ,
+  name: yup.string()
+    .matches(regexName, "Используйте только русские или латинские буквы, пробел или тире")
+    .notOneOf([currentUser.data.name], "Новое и старое имя не должны совпадать")
+});
   return (
     <>
     <header className="App__profile">
@@ -75,26 +103,89 @@ function Profile(props) {
           }
         />
       </header>
-       <section className="Profile">
-        <h2 className="Profile__title">Привет, Виталий!</h2>
-       <div className="Profile__input">
-         <p className="Profile__label-input">Имя</p>
-         <input id="name"></input>
-         <span className="Profile__current-data">Виталий</span>
-       </div>
-      <div className="Profile__input">
-      <p className="Profile__label-input">E-mail</p>
-       <input id="email"></input>
-       <span className="Profile__current-data">pochta@yandex.ru</span>
-      </div>
-      
-      <button className="Profile__button Profile__button-edit">Редактировать</button>
-      <Link to="/">
-        <button className="Profile__button Profile__button-exit">Выйти из аккаунта</button>
-      </Link>
-      
-   </section>
+       <form className="Profile">
+        <h2 className="Profile__title">Привет, {currentUser.data.name}!</h2>
+        <Formik
+        initialValues={{
+                  name: "",
+                  email: ""
+                }}
+                 validateOnBlur
+                 onSubmit = {(values) => {
+                  /*const { name, email } = values;*/
+                  const name = values.name?values.name:currentUser.data.name;
+                  const email = values.email?values.email:currentUser.data.email;
+                  console.log(name);
+                  console.log(email);
+                  mainApi.editUserInfo( name, email)
+                  .then((res) => {
+                    console.log(res);
+                    setCurrentUser(res);
+                  })
+                }}
+                 validationSchema={validationsSchemaProfile}
+                 >
+                  { ({
+                    values,
+                    errors,
+                    touched,
+                    handleChange,
+                    handleBlur,
+                    isValid,
+                    handleSubmit,
+                    dirty
+                  }) => (
+                    <>
+                    <div className="Profile__block-input">
+                    <div className="Profile__input">
+                      <label className="Profile__label-input">Имя</label>
+                      <input 
+                      className="Profile__input-name"
+                      placeholder={currentUser.data.name}
+                      value={values.name}
+                      name={`name`}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      />
+                      </div>
+                      {touched.name && errors.name && (
+                              <span className="Profile__label-error">
+                                {errors.name}
+                              </span>
+                      )}
+                    </div>
+                    <div className="Profile__block-input">
+                    <div className="Profile__input">
+                      <label className="Profile__label-input">E-mail</label>
+                      <input 
+                      className="Profile__input-email"
+                      placeholder={currentUser.data.email}
+                      value={values.email}
+                      name={`email`}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      />
+                      </div>
+                      {touched.email && errors.email && (
+                              <span className="Profile__label-error">
+                                {errors.email}
+                              </span>
+                      )}
+                    </div>
+                       <button 
+                       type="submit"
+                       className="Profile__button Profile__button-edit"
+                       disabled={!isValid || !dirty}
+                       onClick={handleSubmit}
+                        >Редактировать</button>
+                       <button className="Profile__button Profile__button-exit" onClick={signOut}>Выйти из аккаунта</button>      
+                       </>          
 
+                  )
+
+                  }
+        </Formik>
+        </form>
    </>
   )}
 

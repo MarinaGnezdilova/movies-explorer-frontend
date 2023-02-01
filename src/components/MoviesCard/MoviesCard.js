@@ -4,7 +4,7 @@ function MoviesCard(props) {
   return (
     <div className="MoviesCard">
       <img
-        src={props.imageLink}
+        src={"https://api.nomoreparties.co/"+ props.imageLink}
         alt="Баннер фильма"
         className="MoviesCard__card-image"
       />

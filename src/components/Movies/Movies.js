@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import Header from "../Header/Header";
 import { Link } from "react-router-dom";
 import accountButton from "../../images/account-logo.svg";
@@ -7,12 +8,55 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 import Navigation from "../Navigation/Navigation";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import cardImage from "../../images/card-image.png";
-import cardImage1 from "../../images/card-image1.png";
-import cardImage2 from "../../images/card-image2.png";
-import cardImage3 from "../../images/card-image3.png";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 function Movies() {
+  const windowInnerWidth = window.innerWidth;
+  const currentMoviesPerRender= () => {
+    if (windowInnerWidth >= 1280) {
+      return 12
+    } else if(windowInnerWidth >= 768) { 
+      return 8} else { return 5}
+  };
+  
+  const { filteredMovies } = React.useContext(CurrentUserContext);
+  /*const firstRenderMovies = JSON.parse(localStorage.getItem("filtredMovies"));*/
+  const [currentRenderMovies, setCurrentRenderMovies] = useState(0);
+  const [moviesPerRender, setMoviesPerRender] = useState(currentMoviesPerRender());
+  const [renderMovies, setRenderMovies] = useState({});
+  const lastMovieIndex = (moviesPerRender+currentRenderMovies-1);
+  /*const currentMovies = filteredMovies.slice(0, (lastMovieIndex));*/
+  const nextRender = () => {
+    const currentWindowInnerWidth = window.innerWidth;
+    const mountAdded = () => {
+      if (currentWindowInnerWidth >= 1280) {
+        return 3
+      } else { 
+        return 2} 
+    };
+    setCurrentRenderMovies( prev => prev + mountAdded());
+};
+  function firstRender () {
+    console.log('1');
+    setCurrentRenderMovies(1);
+    console.log(filteredMovies);
+    /*const render = JSON.parse(localStorage.getItem("filtredMovies"));*/
+    setRenderMovies(filteredMovies);
+   
+    /*console.log(render);*/
+  };
+  const isButtonElseHidden = /*filteredMovies*/renderMovies.length <= lastMovieIndex;
+  console.log(renderMovies);
+  console.log(filteredMovies);
+ React.useEffect(() => {
+  const firstRenderMovies = JSON.parse(localStorage.getItem("filtredMovies"));
+  console.log(firstRenderMovies);
+   setRenderMovies(firstRenderMovies);
+  },[]);
+
+  
+
+
   return (
     <>
       <header className="App__header-page-movies">
@@ -85,34 +129,38 @@ function Movies() {
           }
         />
       </header>
-      <SearchForm />
+      <SearchForm 
+        firstRender ={firstRender}
+        setRenderMovies ={setRenderMovies}
+
+      />
       <FilterCheckbox />
       <Preloader />
       <MoviesCardList
         children={
           <>
-            <MoviesCard
-              imageLink={cardImage}
-              nameFilm="Киноальманах «100 лет дизайна»"
-              duration="1ч 17м"
-            />
-            <MoviesCard
-              imageLink={cardImage1}
-              nameFilm="33 слова о дизайне"
-              duration="1ч 17м"
-            />
-            <MoviesCard
-              imageLink={cardImage2}
-              nameFilm="В погоне за Бенкси"
-              duration="1ч 17м"
-            />
-            <MoviesCard
-              imageLink={cardImage3}
-              nameFilm="Бег это свобода"
-              duration="1ч 17м"
-            />
+          {/*{(firstRenderMovies.length > 0) && firstRenderMovies.slice(0, (lastMovieIndex)).map((movie, i) => (
+          <MoviesCard
+            key={movie.id}
+            imageLink={movie.image.url}
+            nameFilm={movie.nameRU}
+            duration={movie.duration}
+          />
+          ))}*/}
+          {(/*filteredMovies*/renderMovies.length > 0) && /*currentMovies*//*filteredMovies*/renderMovies.slice(0, (lastMovieIndex)).map((movie, i) => (
+          <MoviesCard
+            key={movie.id}
+            imageLink={movie.image.url}
+            nameFilm={movie.nameRU}
+            duration={movie.duration}
+          />
+          )
+          )
+        }
           </>
         }
+        nextRender={nextRender}
+        isButtonElseHidden={isButtonElseHidden}
       />
       <Footer />
     </>

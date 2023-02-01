@@ -32,7 +32,7 @@
 .Profile__input {
   display: flex;
   justify-content: space-between;
-  width: 410px;
+  width: 300px;
   position: relative;
   padding-bottom: 10px;
 }
@@ -63,10 +63,10 @@
   line-height: 1.2;
   font-style: normal;
   margin-right: 15px;
+  margin-top: 10px;
 }
 
-#name,
-#email {
+.Profile__input-name, .Profile__input-email {
   position: absolute;
   width: 100%;
   left: 40px;
@@ -106,6 +106,10 @@
   margin-top: 200px;
 }
 
+.Profile__button-edit:disabled {
+  opacity: .4;
+}
+
 @media screen and (max-width: 769px) {
   .Profile__button-edit {
     margin-top: 190px;
@@ -128,4 +132,25 @@
   font-style: normal;
   padding-top: 11px;
   z-index: 3;
+}
+
+.Profile__input-name {
+  text-align: end;
+}
+
+.Profile__input-email {
+  text-align: end;
+}
+
+.Profile__label-error {
+  margin: 0;
+  padding: 0;
+  color:#EE3465 ;
+  font-family: "Inter", "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 1.2;
+  font-style: normal;
+  margin-left: 35px;
+  
 }

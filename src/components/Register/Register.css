@@ -82,8 +82,7 @@
   }
   
   .Register__button {
-    margin-top: 49px;
-    margin-left: 15px;
+    margin-top: 70px;
     background-color: #4285f4;
     width: 396px;
     height: 45px;
@@ -105,9 +104,14 @@
       margin-top: 120px;
     }
   }
+
+  .Register__button:disabled {
+      opacity: .4;
+  }
   
   .Register__block-under-button {
     display: flex;
+    justify-content: center;
     margin-top: 16px;
     z-index: 150;
   }
@@ -139,12 +143,15 @@
   
   .Register__text-link-under-button {
     text-decoration: none;
+    background-color: #202020;
+    border: none;
     color: #4285f4;
     font-family: "Inter", "Arial", sans-serif;
     font-weight: 400;
     font-size: 14px;
     line-height: 1.2;
     font-style: normal;
+    cursor: pointer;
   }
   
   @media screen and (max-width: 650px) {
@@ -175,12 +182,10 @@
   .Register__inputs {
     display: flex;
     flex-direction: column;
-    height: 290px;
   }
   
   @media screen and (max-width: 650px) {
     .Register__inputs {
-      height: 300px;
       width: 260px;
       display: flex;
       flex-direction: column;

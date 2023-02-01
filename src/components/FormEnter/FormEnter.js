@@ -1,6 +1,9 @@
 import Header from "../Header/Header";
 import { Link } from "react-router-dom";
 function FormEnter(props) {
+  /*function onSubmit(data) {
+      console.log(data);
+  }*/
   return (
     <main className="FormEnter">
       <div className="FormEnter__header">
@@ -9,10 +12,11 @@ function FormEnter(props) {
         </div>
         <h2 className="FormEnter__title">{props.title}</h2>
         <form className="FormEnter__form">
-          <div className="FormEnter__inputs">{props.children}</div>
-          <Link to={props.linkButton}>
-            <button className="FormEnter__button">{props.buttonText}</button>
-          </Link>
+          <div className="FormEnter__inputs">
+            {props.children}</div>
+         
+            <button type="submit" className="FormEnter__button">{props.buttonText}</button>
+         
           <div className="FormEnter__block-under-button">
             <p className="FormEnter__text">{props.textUderButton}</p>
             <Link
