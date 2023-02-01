@@ -38,7 +38,7 @@ function App() {
   const [emailForLogin, setEmailForLogin] = useState("");
   const [passwordForLogin, setPasswordForLogin] = useState("");*/
   const [currentUser, setCurrentUser] = React.useState({});
-  /* const [isRegisterCompleted, setIsRegisterCompleted] = React.useState(false);*/
+  
 
   function onRegisterCompleted() {
     navigate("/signin");
