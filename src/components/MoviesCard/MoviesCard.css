@@ -171,3 +171,7 @@
   width: 8px;
   height: 8px;
 }
+
+.MoviesCard__button-delete-film-inactive {
+  display: none;
+}

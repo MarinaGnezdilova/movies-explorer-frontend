@@ -10,7 +10,7 @@ import Navigation from "../Navigation/Navigation";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-function Movies() {
+function Movies(props) {
   const windowInnerWidth = window.innerWidth;
   const currentMoviesPerRender= () => {
     if (windowInnerWidth >= 1280) {
@@ -23,7 +23,7 @@ function Movies() {
   /*const firstRenderMovies = JSON.parse(localStorage.getItem("filtredMovies"));*/
   const [currentRenderMovies, setCurrentRenderMovies] = useState(0);
   const [moviesPerRender, setMoviesPerRender] = useState(currentMoviesPerRender());
-  const [renderMovies, setRenderMovies] = useState({});
+  const [renderMovies, setRenderMovies] = useState([]);
   const lastMovieIndex = (moviesPerRender+currentRenderMovies-1);
   /*const currentMovies = filteredMovies.slice(0, (lastMovieIndex));*/
   const nextRender = () => {
@@ -41,21 +41,29 @@ function Movies() {
     setCurrentRenderMovies(1);
     console.log(filteredMovies);
     /*const render = JSON.parse(localStorage.getItem("filtredMovies"));*/
-    setRenderMovies(filteredMovies);
+    setRenderMovies(filteredMovies || []);
    
-    /*console.log(render);*/
+   /* console.log(render);*/
   };
   const isButtonElseHidden = /*filteredMovies*/renderMovies.length <= lastMovieIndex;
   console.log(renderMovies);
   console.log(filteredMovies);
+
  React.useEffect(() => {
   const firstRenderMovies = JSON.parse(localStorage.getItem("filtredMovies"));
   console.log(firstRenderMovies);
-   setRenderMovies(firstRenderMovies);
+  console.log('2');
+   setRenderMovies(firstRenderMovies || []);
   },[]);
 
-  
+  React.useEffect(() => {
+    setRenderMovies(filteredMovies|| []);
+    console.log('1');
+  }, [filteredMovies]);
 
+  function onCardSave(movie) {
+    props.onCardSave(movie)
+  }
 
   return (
     <>
@@ -150,9 +158,13 @@ function Movies() {
           {(/*filteredMovies*/renderMovies.length > 0) && /*currentMovies*//*filteredMovies*/renderMovies.slice(0, (lastMovieIndex)).map((movie, i) => (
           <MoviesCard
             key={movie.id}
+            movie={movie}
             imageLink={movie.image.url}
             nameFilm={movie.nameRU}
             duration={movie.duration}
+            onCardSave={onCardSave}
+            classNameDelete="MoviesCard__button-delete-film-inactive"
+
           />
           )
           )

@@ -55,8 +55,33 @@ class Api {
         }).then(this._checkResponse);
       }
     
+      saveMovie(movie) {
+        return fetch( `${this._baseUrl}/movies`, {
+            method: "POST",
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ 
+              nameRU: movie.nameRU, 
+              nameEN: movie.nameEN,
+              country: movie.country,
+              director: movie.director, 
+              duration: movie.duration, 
+              year: movie.year, 
+              description: movie.description, 
+              image: movie.image.url,  
+              trailerLink: movie.trailerLink, 
+              thumbnail: movie.image.formats.thumbnail.url, 
+              /*movieId: movie.id,*/
+             }), 
+        }).then(this._checkResponse);
+    }
 
 }
+
+
 
 export const mainApi = new Api(
     "http://localhost:3001"

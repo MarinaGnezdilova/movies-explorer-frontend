@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Main from "../Main/Main";
 import FormEnter from "../FormEnter/FormEnter";
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -16,19 +16,31 @@ import * as yup from "yup";
 import { Link } from "react-router-dom";
 
 function App() {
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(true);
   const [searchValue, setSearchValue] = useState('');
-  const [filteredMovies, setFilteredMovies] = useState({});
-  const films = api
-    .getFilms()
-    .then((res) => {
-      localStorage.setItem("movies", JSON.stringify(res));
-    })
-    .catch((e) => {
-      alert("Не удалось получить фильмы");
-    });
+  const [initialMovies, setInitialMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
+  const getFilms = useCallback(() => api
+  .getFilms()
+  .then((res) => {
+    const localFilteredMovies =  JSON.parse(localStorage.getItem("filteredMovies"));
+    setInitialMovies(res);
+    if (!localFilteredMovies) {
+      setFilteredMovies(res);
+    }
+  })
+  .catch((e) => {
+    alert("Не удалось получить фильмы");
+  }), []);
 
-  const initialMovies = JSON.parse(localStorage.getItem("movies"));
+  useEffect(() => {
+    getFilms();
+    const localFilteredMovies =  JSON.parse(localStorage.getItem("filteredMovies"));
+    const localQuery = JSON.parse(localStorage.getItem("query"));
+
+    localFilteredMovies && setFilteredMovies(localFilteredMovies);
+    localQuery && setSearchValue(localQuery);
+  }, []);
 
   const navigate = useNavigate();
  
@@ -69,7 +81,7 @@ function App() {
       localStorage.setItem("filtredMovies", JSON.stringify(filtered));
   }
   }
-  , [searchValue]);
+  , [searchValue, initialMovies]);
 
 
 
@@ -119,14 +131,28 @@ function App() {
       ),
   });
 
+  function handleSaveMovie(movie) {
+    console.log(movie);
+    console.log(currentUser);
+    const owner = currentUser.data._id;
+    console.log(owner);
+    mainApi.saveMovie(movie).then((e) =>{console.log(e)}).catch((e)=>{console.log(e)})
+
+  }
+
   return (
     <CurrentUserContext.Provider
-      value={{ currentUser, setLoggedIn, setCurrentUser, loggedIn, setSearchValue, filteredMovies }}
+      value={{ 
+        currentUser, setLoggedIn, setCurrentUser, loggedIn, 
+        setSearchValue, filteredMovies
+       }}
     >
       <page className="App">
         <Routes>
           <Route exact path="/" element={<Main />} />
-          <Route path="/movies" element={<Movies />} />
+          <Route path="/movies" element={<Movies 
+            onCardSave={handleSaveMovie}
+          />} />
           <Route path="/saved-movies" element={<SavedMovies />} />
           <Route
             path="/signup"

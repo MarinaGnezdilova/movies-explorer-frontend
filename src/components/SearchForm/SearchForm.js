@@ -16,12 +16,15 @@ function SearchForm(props) {
     setSearchValue(value);
     props.firstRender();
     localStorage.setItem("query", JSON.stringify(value));
+    
+    
   }
   React.useEffect(() => {
     const query = JSON.parse(localStorage.getItem("query"));
     console.log(query);
     setValue(query);
   },[]);
+
   
   return (
     <>
