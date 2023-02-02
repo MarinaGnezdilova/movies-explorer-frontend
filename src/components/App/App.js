@@ -136,7 +136,7 @@ function App() {
     console.log(currentUser);
     const owner = currentUser.data._id;
     console.log(owner);
-    mainApi.saveMovie(movie).then((e) =>{console.log(e)}).catch((e)=>{console.log(e)})
+    mainApi.saveMovie(movie).then((res) =>{console.log(res)}).catch((e)=>{console.log(e)})
 
   }
 
