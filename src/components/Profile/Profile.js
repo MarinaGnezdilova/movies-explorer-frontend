@@ -1,4 +1,4 @@
-import React, { useState }  from "react";
+import React, { useState}  from "react";
 import { useNavigate } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import Header from "../Header/Header";
@@ -10,17 +10,27 @@ import { Formik } from "formik";
 import * as yup from "yup";
 
 function Profile(props) {
+  const regexName = /^[a-zа-я\ \-]+$/gi; 
+
   const {currentUser} = React.useContext(CurrentUserContext);
   const {setLoggedIn} = React.useContext(CurrentUserContext);
   const {setCurrentUser} = React.useContext(CurrentUserContext);
+  const [ isEditProfileSuccess, setIsEditProfileSuccess] = useState('');
+  const [ isEditProfileUnsuccess, setIsEditProfileUnsuccess] = useState('');
   const navigate = useNavigate();
 
 function signOut() {
   localStorage.removeItem("jwt");
+  localStorage.removeItem("query");
+  localStorage.removeItem("savedMovies");
+  localStorage.removeItem("filtredMovies");
+  localStorage.removeItem("movies");
+  localStorage.removeItem("querySaved");
+  localStorage.removeItem("checkbox");
   navigate("/");
   setLoggedIn(false);
 }
-const regexName = /^[a-zа-я\ \-]+$/gi;  
+ 
 const validationsSchemaProfile = yup.object().shape({
   email: yup
     .string()
@@ -31,6 +41,12 @@ const validationsSchemaProfile = yup.object().shape({
     .matches(regexName, "Используйте только русские или латинские буквы, пробел или тире")
     .notOneOf([currentUser.data.name], "Новое и старое имя не должны совпадать")
 });
+
+React.useEffect(() => {
+  setIsEditProfileSuccess('');
+  setIsEditProfileUnsuccess('');
+}, [])
+
   return (
     <>
     <header className="App__profile">
@@ -115,13 +131,14 @@ const validationsSchemaProfile = yup.object().shape({
                   /*const { name, email } = values;*/
                   const name = values.name?values.name:currentUser.data.name;
                   const email = values.email?values.email:currentUser.data.email;
-                  console.log(name);
-                  console.log(email);
                   mainApi.editUserInfo( name, email)
                   .then((res) => {
-                    console.log(res);
                     setCurrentUser(res);
+                    setIsEditProfileSuccess('Данные изменены');
                   })
+                  .catch((e) => {
+                    setIsEditProfileUnsuccess('Ошибка при редактировании');
+                  });
                 }}
                  validationSchema={validationsSchemaProfile}
                  >
@@ -172,6 +189,7 @@ const validationsSchemaProfile = yup.object().shape({
                               </span>
                       )}
                     </div>
+                        <span className="Profile__message-edit-result">{isEditProfileSuccess}{isEditProfileUnsuccess}</span>
                        <button 
                        type="submit"
                        className="Profile__button Profile__button-edit"

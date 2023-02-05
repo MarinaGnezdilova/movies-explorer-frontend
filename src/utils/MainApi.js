@@ -71,12 +71,31 @@ class Api {
               duration: movie.duration, 
               year: movie.year, 
               description: movie.description, 
-              image: movie.image.url,  
-              trailerLink: movie.trailerLink, 
-              thumbnail: movie.image.formats.thumbnail.url, 
-              /*movieId: movie.id,*/
+              image: `https://api.nomoreparties.co${movie.image.url}`,  
+              trailerLink: `https://api.nomoreparties.co${movie.trailerLink}`, 
+              thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`, 
+              id: `${movie.id}`,
              }), 
         }).then(this._checkResponse);
+    }
+
+    deleteMovie(id) {
+      return fetch(`${this._baseUrl}/movies/${id}`, {
+        method: "DELETE",
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+          'Content-Type': 'application/json'
+        },
+      }).then(this._checkResponse);
+    }
+
+    getMovies() {
+      return fetch(`${this._baseUrl}`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+          'Content-Type': 'application/json'
+        },
+      }).then(this._checkResponse);
     }
 
 }

@@ -90,3 +90,18 @@
 .preloader_inactive {
     display: none;
 }
+
+.preloader__error {
+    display: flex;
+    font-family: "Inter", "Arial", sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.6;
+    font-style: normal;
+    color: #FF6838;
+    padding-top: 15px;
+}
+
+.preloader__error_hide {
+    display: none;
+}

@@ -1,12 +1,15 @@
 import React from 'react'
-
-const Preloader = () => {
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+function Preloader(props) { 
+    const { isLoading } = React.useContext(CurrentUserContext);
     return (
-        <div className="preloader preloader_inactive">
+        <>
+        <div className={`${isLoading ? "preloader" : "preloader_inactive"}`}>
             <div className="preloader__container">
                 <span className="preloader__round"></span>
             </div>
         </div>
+        </>
     )
 };
 

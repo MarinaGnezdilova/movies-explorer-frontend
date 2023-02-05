@@ -24,9 +24,7 @@ function Register(props) {
           <h2 className="Register__title">{props.title}</h2>
           <form className="Register__form" onSubmit={props.submit} >
             <div className="Register__inputs">{props.children}</div>
-            {/*<Link to={props.linkButton}>*/}
               <button type="submit" className="Register__button">{props.buttonText}</button>
-            {/*</Link>*/}
             <div className="Register__block-under-button">
               <p className="Register__text">{props.textUderButton}</p>
               <button onClick={handleClickEnter} className="Register__text-link-under-button">

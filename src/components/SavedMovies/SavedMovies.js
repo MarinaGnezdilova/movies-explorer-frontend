@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "../Header/Header";
 import Navigation from "../Navigation/Navigation";
@@ -6,12 +6,39 @@ import accountButton from "../../images/account-logo.svg";
 import SearchForm from "../SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
 import Footer from "../Footer/Footer";
-import MoviesCard from "../MoviesCard/MoviesCard";
-import cardImage2 from "../../images/card-image2.png";
-import cardImage3 from "../../images/card-image3.png";
 import SavedMoviesCardList from "../SavedMoviesCardList/SavedMoviesCardList";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
-function SavedMovies() {
+import MoviesCard from "../MoviesCard/MoviesCard";
+import SearchFormSavedFilm from "../SeachFormSavedFilm/SearchFormSavedFilm";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+function SavedMovies(props) {
+  const { initialSavedMovies } = React.useContext(CurrentUserContext);
+  const { setSearchValueSavedFilm } = React.useContext(CurrentUserContext);
+  const { setIsLoading } = React.useContext(CurrentUserContext);
+
+  const [renderMovies, setRenderMovies] = useState([]);
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+  const { isCheckboxActive } = React.useContext(CurrentUserContext);
+  
+  React.useEffect(() => {
+    setRenderMovies(initialSavedMovies);
+    setIsLoading(false);
+  }, [initialSavedMovies,isCheckboxActive])
+
+  React.useEffect(() => {
+    const savedFilms =  JSON.parse(localStorage.getItem("savedMovies"));
+    savedFilms && setRenderMovies(savedFilms);
+    setIsLoading(false);
+  }, [])
+
+  function onDeleteMovie(movie) {
+  props.onDeleteMovie(movie);
+}
+
+function onActiveCheckbox () {
+  props.onActiveCheckbox();
+}
+
   return (
     <main className="SavedMovies">
       <header className="App__header-page-movies">
@@ -85,29 +112,33 @@ function SavedMovies() {
           }
         />
       </header>
-      <SearchForm />
-      <FilterCheckbox />
+      <SearchFormSavedFilm />
+      <FilterCheckbox 
+      onActiveCheckbox={onActiveCheckbox}
+            />
       <Preloader />
       <SavedMoviesCardList
-        children={
-          <div className="SavedMoviesCardList__films">
+       children={
+       <>
+        { ( renderMovies) && renderMovies.map((movie) => (
             <MoviesCard
-              imageLink={cardImage2}
-              nameFilm="В погоне за Бенкси"
-              duration="1ч 17м"
-            />
-            <MoviesCard
-              imageLink={cardImage3}
-              nameFilm="Бег это свобода"
-              duration="1ч 17м"
-            />
-             <MoviesCard
-              imageLink={cardImage2}
-              nameFilm="В погоне за Бенкси"
-              duration="1ч 17м"
-            />
-          </div>
+            key={movie._id}
+            movie={movie}
+            id={user.data._id}
+            imageLink={movie.image}
+            nameFilm={movie.nameRU}
+            duration={movie.duration}
+            classNameSavedPage="MoviesCard__button-save-film_inactive"
+            classNameHideButtonSaved="MoviesCard__button-saved-film_inactive"
+            onDeleteMovie={onDeleteMovie}
+          />
+
+        )
+        )
         }
+        </>
+       }
+
       />
       <Footer />
     </main>

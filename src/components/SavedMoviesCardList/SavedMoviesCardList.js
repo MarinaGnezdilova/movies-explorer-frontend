@@ -1,8 +1,10 @@
 
 function SavedMoviesCardList(props) {
     return (
-      <section className="SavedMoviesCardList">
+      <section className="MoviesCardList">
+         <div className="MoviesCardList__film">
         {props.children}
+        </div>
       </section>
     );
   }

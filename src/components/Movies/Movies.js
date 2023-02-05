@@ -20,12 +20,15 @@ function Movies(props) {
   };
   
   const { filteredMovies } = React.useContext(CurrentUserContext);
-  /*const firstRenderMovies = JSON.parse(localStorage.getItem("filtredMovies"));*/
+  const { isCheckboxActive } = React.useContext(CurrentUserContext);
+  const { setIsLoading } = React.useContext(CurrentUserContext);
+  
+  
   const [currentRenderMovies, setCurrentRenderMovies] = useState(0);
   const [moviesPerRender, setMoviesPerRender] = useState(currentMoviesPerRender());
   const [renderMovies, setRenderMovies] = useState([]);
   const lastMovieIndex = (moviesPerRender+currentRenderMovies-1);
-  /*const currentMovies = filteredMovies.slice(0, (lastMovieIndex));*/
+  
   const nextRender = () => {
     const currentWindowInnerWidth = window.innerWidth;
     const mountAdded = () => {
@@ -37,34 +40,34 @@ function Movies(props) {
     setCurrentRenderMovies( prev => prev + mountAdded());
 };
   function firstRender () {
-    console.log('1');
     setCurrentRenderMovies(1);
-    console.log(filteredMovies);
-    /*const render = JSON.parse(localStorage.getItem("filtredMovies"));*/
     setRenderMovies(filteredMovies || []);
-   
-   /* console.log(render);*/
   };
-  const isButtonElseHidden = /*filteredMovies*/renderMovies.length <= lastMovieIndex;
-  console.log(renderMovies);
-  console.log(filteredMovies);
+  const isButtonElseHidden = renderMovies.length <= lastMovieIndex;
 
  React.useEffect(() => {
   const firstRenderMovies = JSON.parse(localStorage.getItem("filtredMovies"));
-  console.log(firstRenderMovies);
-  console.log('2');
    setRenderMovies(firstRenderMovies || []);
   },[]);
 
   React.useEffect(() => {
-    setRenderMovies(filteredMovies|| []);
-    console.log('1');
-  }, [filteredMovies]);
+    setRenderMovies(filteredMovies || []);
+    setIsLoading(false);
+  }, [filteredMovies, isCheckboxActive]);
 
   function onCardSave(movie) {
     props.onCardSave(movie)
   }
 
+  function onCardDelete (movie) {
+    props.onCardDelete(movie)
+  }
+
+  function onActiveCheckbox () {
+    props.onActiveCheckbox();
+    console.log(1)
+  }
+ 
   return (
     <>
       <header className="App__header-page-movies">
@@ -142,28 +145,23 @@ function Movies(props) {
         setRenderMovies ={setRenderMovies}
 
       />
-      <FilterCheckbox />
+      <FilterCheckbox 
+      onActiveCheckbox={onActiveCheckbox}
+      />
       <Preloader />
       <MoviesCardList
         children={
           <>
-          {/*{(firstRenderMovies.length > 0) && firstRenderMovies.slice(0, (lastMovieIndex)).map((movie, i) => (
-          <MoviesCard
-            key={movie.id}
-            imageLink={movie.image.url}
-            nameFilm={movie.nameRU}
-            duration={movie.duration}
-          />
-          ))}*/}
-          {(/*filteredMovies*/renderMovies.length > 0) && /*currentMovies*//*filteredMovies*/renderMovies.slice(0, (lastMovieIndex)).map((movie, i) => (
+          {(renderMovies.length > 0) && renderMovies.slice(0, (lastMovieIndex)).map((movie, i) => (
           <MoviesCard
             key={movie.id}
             movie={movie}
-            imageLink={movie.image.url}
+            imageLink={`https://api.nomoreparties.co/${movie.image.url}`}
             nameFilm={movie.nameRU}
             duration={movie.duration}
             onCardSave={onCardSave}
-            classNameDelete="MoviesCard__button-delete-film-inactive"
+            onCardDelete={onCardDelete}
+            hideButtonDelete={true}
 
           />
           )

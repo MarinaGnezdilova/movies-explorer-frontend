@@ -175,3 +175,7 @@
 .MoviesCard__button-delete-film-inactive {
   display: none;
 }
+
+.MoviesCard_delete {
+  display: none;
+}

@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import iconSearch from "../../images/icon-search.svg";
 import iconArrow from "../../images/icon_arrow.svg";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-function SearchForm(props) {
-  const { setSearchValue } = React.useContext(CurrentUserContext);
-  const { filteredMovies } = React.useContext(CurrentUserContext);
+function SearchFormSavedFilm(props) {
+  const { setSearchValueSavedFilm } = React.useContext(CurrentUserContext);
+  const { setInitialSavedMovies } = React.useContext(CurrentUserContext);
+  /*const { filteredMovies } = React.useContext(CurrentUserContext);*/
   const [value, setValue] = React.useState('');
   const [ isValueValid, setIsValueValid] = useState(true);
 
@@ -16,40 +17,46 @@ function SearchForm(props) {
     e.preventDefault();
     if (value === "") {
       setIsValueValid(false);
+      console.log(1);
+      const initiaMovies = JSON.parse(localStorage.getItem("savedMovies"));
+      setInitialSavedMovies(initiaMovies);
+
     } else {
-      setSearchValue(value);
-      props.firstRender();
-      localStorage.setItem("query", JSON.stringify(value));
-      setIsValueValid(true);
+    setSearchValueSavedFilm(value);
+    localStorage.setItem("querySaved", JSON.stringify(value));
+    setIsValueValid(true);
+    console.log(2);
     }
   }
-  React.useEffect(() => {
-    const query = JSON.parse(localStorage.getItem("query"));
-    setValue(query);
+
+ React.useEffect(() => {
+    const query = JSON.parse(localStorage.getItem("querySaved"));
+    /*setValue(query);*/
   },[]);
 
   
   return (
     <>
-      <form className="SearchForm">
-        <div className="SearchForm__icon-search">
+      <form className="SearchFormSavedFilm">
+        <div className="SearchFormSavedFilm__icon-search">
           <img
             alt="Иконка поиска"
             src={iconSearch}
-            className="SearchForm__icon-search-image"
+            className="SearchFormSavedFilm__icon-search-image"
           />
         </div>
         <input 
-          className="SearchForm__input" 
+          className="SearchFormSavedFilm__input" 
           placeholder="Фильм" 
           required
           value={value} onChange={handleChange}
         />
-        <button type="submit" /*disabled={isValueValid}*/ className="SearchForm__button" onClick={handleSubmit}>
+        <button type="submit" /*disabled={isValueValid}*/ className="SearchFormSavedFilm__button" onClick={handleSubmit} >
           <img
             src={iconArrow}
             alt="Кнопка в поисковой строке"
-            className="SearchForm__button-image"
+            className="SearchFormSavedFilm__button-image"
+           
           />
         </button>
       </form>
@@ -58,4 +65,4 @@ function SearchForm(props) {
   );
 }
 
-export default SearchForm;
+export default SearchFormSavedFilm;
